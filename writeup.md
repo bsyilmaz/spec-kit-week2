@@ -90,11 +90,13 @@ user-research metric and was excluded), 9 acceptance scenarios, 5 edge cases, 6 
 
 ## 4. What I learned
 
-SDD felt like overhead for the parts of this feature that were obvious — a one-line plan answer
-("use localStorage") turned into a research file, a data model and two contracts, and most of
-that text was never surprising. It paid off at the edges: writing edge cases and contracts up
-front produced tests for corrupted and blocked storage that I would not have written otherwise,
-and the "New quote" bug showed the real lesson — converge can only be as good as the spec, so
-when behavior is wrong but "to spec," fixing the spec first made the agent's next pass produce the
-right plan, tests and code without me touching the implementation. Keeping each stage as a
-separate commit also made the human review gates concrete instead of a formality.
+For a page this small, SDD was clearly overhead in places: a one-line plan input ("use
+localStorage") turned into a research file, a data model and two contracts, and most of that
+writing confirmed decisions I would have made anyway. Where it paid off was the edges and the
+feedback loop — the edge cases written into the spec became tests for corrupted and blocked
+storage that I would have skipped otherwise. The most useful moment was the "New quote" bug: the
+code repeated the current quote, but it matched the spec, so `/speckit-converge` could not see the
+problem; once I fixed the spec instead of the code, the next plan → converge → implement pass
+produced the right tests and implementation on its own. My takeaway is that the spec is only as
+good as the human review behind it, and SDD is worth its cost when behavior is subtle or will
+change, not for trivial UI.

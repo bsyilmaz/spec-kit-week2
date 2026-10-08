@@ -29,3 +29,4 @@ npm test      # Node ≥ 18, zero dependencies (node --test)
 | `index.html`, `src/` | The page |
 | `tests/` | Unit tests for the logic modules + a UI-safety guard |
 | `writeup.md` | Prompts, the spec refinement, convergence outcome, reflection |
+| `docs/` | Screenshots |

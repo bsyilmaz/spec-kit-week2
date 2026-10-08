@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A random quote, a New quote button, and favorites that survive a reload.">
+  <title>Quote of the Day</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <script defer src="src/quotes.js"></script>
+  <script defer src="src/quote-picker.js"></script>
+  <script defer src="src/favorites.js"></script>
+  <script defer src="src/app.js"></script>
+</head>
+<body>
+  <main class="page">
+    <p class="eyebrow">Quote of the Day</p>
+
+    <figure id="quote" class="quote" aria-live="polite">
+      <blockquote id="quote-text" class="quote__text"></blockquote>
+      <figcaption id="quote-author" class="quote__author"></figcaption>
+    </figure>
+
+    <div class="actions">
+      <button id="new-quote" type="button" class="btn btn--primary">New quote</button>
+      <button id="favorite" type="button" class="btn btn--favorite" aria-pressed="false">☆ Favorite</button>
+    </div>
+
+    <p id="storage-note" class="note" hidden>
+      Favorites can't be saved in this browser right now, so they'll be forgotten when you leave.
+    </p>
+
+    <noscript><p class="note">This page needs JavaScript to show quotes.</p></noscript>
+  </main>
+</body>
+</html>

@@ -28,9 +28,9 @@ Single static project: `index.html` at repository root, code in `src/`, tests in
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create directories `src/` and `tests/` per plan.md Project Structure
-- [ ] T002 [P] Create `package.json` with `"private": true`, no dependencies, and script `"test": "node --test"` (no path argument — see research R6)
-- [ ] T003 [P] Create `.gitignore` ignoring `node_modules/` and OS files (do NOT ignore `.specify/` or `specs/`)
+- [X] T001 Create directories `src/` and `tests/` per plan.md Project Structure
+- [X] T002 [P] Create `package.json` with `"private": true`, no dependencies, and script `"test": "node --test"` (no path argument — see research R6)
+- [X] T003 [P] Create `.gitignore` ignoring `node_modules/` and OS files (do NOT ignore `.specify/` or `specs/`)
 
 ---
 
@@ -40,10 +40,10 @@ Single static project: `index.html` at repository root, code in `src/`, tests in
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 [P] Write `tests/quotes.test.js`: collection has ≥ 10 quotes; every `id` is unique and matches `/^[a-z0-9]+(-[a-z0-9]+)*$/`; `text` and `author` are "Required, non-empty after trim"; array is frozen (FR-001)
-- [ ] T005 Create `src/quotes.js` with ≥ 12 quotes `{ id, text, author }` using the dual-export pattern from research R1 (`window.QOTD.QUOTES` / `module.exports.QUOTES`), frozen with `Object.freeze`
-- [ ] T006 Create `index.html` skeleton with the elements in contracts/ui.md (`#quote` with `aria-live="polite"`, `#quote-text`, `#quote-author`, `#new-quote`, `#favorite` with `aria-pressed="false"`, `#storage-note` hidden) and `<script defer>` tags in order: quotes.js, quote-picker.js, favorites.js, app.js
-- [ ] T007 [P] Create `src/styles.css`: centered card layout, readable typography, visible `:focus-visible` outlines, distinct favorited state, responsive down to 320 px
+- [X] T004 [P] Write `tests/quotes.test.js`: collection has ≥ 10 quotes; every `id` is unique and matches `/^[a-z0-9]+(-[a-z0-9]+)*$/`; `text` and `author` are "Required, non-empty after trim"; array is frozen (FR-001)
+- [X] T005 Create `src/quotes.js` with ≥ 12 quotes `{ id, text, author }` using the dual-export pattern from research R1 (`window.QOTD.QUOTES` / `module.exports.QUOTES`), frozen with `Object.freeze`
+- [X] T006 Create `index.html` skeleton with the elements in contracts/ui.md (`#quote` with `aria-live="polite"`, `#quote-text`, `#quote-author`, `#new-quote`, `#favorite` with `aria-pressed="false"`, `#storage-note` hidden) and `<script defer>` tags in order: quotes.js, quote-picker.js, favorites.js, app.js
+- [X] T007 [P] Create `src/styles.css`: centered card layout, readable typography, visible `:focus-visible` outlines, distinct favorited state, responsive down to 320 px
 
 **Checkpoint**: `npm test` passes for quote data; page skeleton opens.
 
@@ -57,12 +57,12 @@ Single static project: `index.html` at repository root, code in `src/`, tests in
 
 ### Tests for User Story 1
 
-- [ ] T008 [P] [US1] Write `tests/quote-picker.test.js`: `pickRandom` returns `quotes[Math.floor(rng()*n)]` for injected rng values 0, 0.5, 0.999; throws on empty array / non-array; works with a single-item list (FR-002)
+- [X] T008 [P] [US1] Write `tests/quote-picker.test.js`: `pickRandom` returns `quotes[Math.floor(rng()*n)]` for injected rng values 0, 0.5, 0.999; throws on empty array / non-array; works with a single-item list (FR-002)
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Implement `pickRandom(quotes, rng = Math.random)` in `src/quote-picker.js` per contracts/modules.md (dual export)
-- [ ] T010 [US1] Implement `src/app.js` bootstrap: read `window.QOTD`, pick an initial quote, and a single `render()` that sets `#quote-text` and `#quote-author` via `textContent` (FR-002, FR-009)
+- [X] T009 [US1] Implement `pickRandom(quotes, rng = Math.random)` in `src/quote-picker.js` per contracts/modules.md (dual export)
+- [X] T010 [US1] Implement `src/app.js` bootstrap: read `window.QOTD`, pick an initial quote, and a single `render()` that sets `#quote-text` and `#quote-author` via `textContent` (FR-002, FR-009)
 
 **Checkpoint**: MVP — page shows a random quote on every load.
 
@@ -76,7 +76,7 @@ Single static project: `index.html` at repository root, code in `src/`, tests in
 
 ### Implementation for User Story 2
 
-- [ ] T011 [US2] In `src/app.js`, handle `click` on `#new-quote`: pick a quote with `pickRandom`, update state, call `render()` (FR-003; native `<button>` gives Enter/Space for FR-008)
+- [X] T011 [US2] In `src/app.js`, handle `click` on `#new-quote`: pick a quote with `pickRandom`, update state, call `render()` (FR-003; native `<button>` gives Enter/Space for FR-008)
 
 **Checkpoint**: Stories 1 and 2 work together.
 
@@ -90,13 +90,13 @@ Single static project: `index.html` at repository root, code in `src/`, tests in
 
 ### Tests for User Story 3
 
-- [ ] T012 [P] [US3] Write `tests/favorites.test.js` with an in-memory fake storage: toggle on/off; `has`; `list`; persists JSON array of IDs under `qotd:favorites:v1`; a second store over the same storage sees the same favorites (reload, FR-006); unknown IDs dropped; corrupted JSON → empty; non-array JSON → empty; `getItem`/`setItem` throwing → no throw, in-memory still works, `persisted === false`; `storage` null → memory-only (FR-004, FR-006, FR-007)
+- [X] T012 [P] [US3] Write `tests/favorites.test.js` with an in-memory fake storage: toggle on/off; `has`; `list`; persists JSON array of IDs under `qotd:favorites:v1`; a second store over the same storage sees the same favorites (reload, FR-006); unknown IDs dropped; corrupted JSON → empty; non-array JSON → empty; `getItem`/`setItem` throwing → no throw, in-memory still works, `persisted === false`; `storage` null → memory-only (FR-004, FR-006, FR-007)
 
 ### Implementation for User Story 3
 
-- [ ] T013 [US3] Implement `createFavoritesStore({ storage, validIds })` and `STORAGE_KEY` in `src/favorites.js` per contracts/modules.md and data-model.md load rules (dual export)
-- [ ] T014 [US3] In `src/app.js`, safely obtain `window.localStorage` (access wrapped in try/catch), create the store with the quote IDs, handle `click` on `#favorite` → `toggle(current.id)` → `render()`
-- [ ] T015 [US3] Extend `render()` in `src/app.js`: set `#favorite` `aria-pressed` and label (`☆ Favorite` / `★ Favorited`) from `store.has(current.id)`; show `#storage-note` when `store.persisted` is false (FR-005, FR-007)
+- [X] T013 [US3] Implement `createFavoritesStore({ storage, validIds })` and `STORAGE_KEY` in `src/favorites.js` per contracts/modules.md and data-model.md load rules (dual export)
+- [X] T014 [US3] In `src/app.js`, safely obtain `window.localStorage` (access wrapped in try/catch), create the store with the quote IDs, handle `click` on `#favorite` → `toggle(current.id)` → `render()`
+- [X] T015 [US3] Extend `render()` in `src/app.js`: set `#favorite` `aria-pressed` and label (`☆ Favorite` / `★ Favorited`) from `store.has(current.id)`; show `#storage-note` when `store.persisted` is false (FR-005, FR-007)
 
 **Checkpoint**: All user stories independently functional.
 

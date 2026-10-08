@@ -147,3 +147,10 @@ Task: "Implement src/favorites.js"             # T013 (after T012 is red)
 1. + US2 → "New quote" works → demo.
 2. + US3 → favorites persist → demo.
 3. Polish → README, full test run, quickstart walkthrough.
+
+---
+
+## Phase 7: Convergence
+
+- [ ] T019 Add an automated guard `tests/ui-safety.test.js` asserting `src/app.js` never uses `innerHTML`, `outerHTML`, `insertAdjacentHTML` or `document.write`, and update quickstart step 6 to name the actual FR-009 check, per FR-009 / Constitution III (partial)
+- [ ] T020 Create `README.md` (run, test, where spec artifacts live) — T016 is still open and no README exists, per plan: Project Structure / T016 (missing)

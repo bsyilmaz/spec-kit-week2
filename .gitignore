@@ -1,0 +1,16 @@
+# Dependencies / build output
+node_modules/
+dist/
+build/
+*.log
+.env*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+
+# NOTE: .specify/ and specs/ are intentionally committed (spec artifacts are deliverables).

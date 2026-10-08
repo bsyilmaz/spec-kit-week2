@@ -1,0 +1,9 @@
+{
+  "name": "spec-kit-week2",
+  "version": "1.0.0",
+  "description": "Quote of the Day — built spec-driven with GitHub Spec Kit",
+  "private": true,
+  "scripts": {
+    "test": "node --test"
+  }
+}

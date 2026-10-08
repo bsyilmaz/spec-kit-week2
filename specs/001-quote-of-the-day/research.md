@@ -58,7 +58,11 @@ decisions and the alternatives that were rejected.
 ## R6. Test runner
 
 - **Decision**: Node's built-in `node:test` + `node:assert/strict`, run with `npm test`
-  (`node --test tests/`).
+  (`node --test`, **no path argument**). Node's default discovery picks up every `*.test.js`
+  file outside `node_modules/`.
+- **Refinement (during implement)**: the first version of this plan said `node --test tests/`.
+  On Node 22 a bare directory argument is resolved as a module path and fails with
+  `Cannot find module '.../tests'`, so the plan was corrected before touching code.
 - **Rationale**: Zero installs (Constitution III); available in Node ≥ 18.
 - **Alternatives considered**: Jest/Vitest (rejected: dependencies); browser-based tests with
   Playwright (rejected for now: heavy; the DOM layer is thin and covered by quickstart checks).

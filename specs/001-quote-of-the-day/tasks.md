@@ -29,7 +29,7 @@ Single static project: `index.html` at repository root, code in `src/`, tests in
 **Purpose**: Project initialization and basic structure
 
 - [ ] T001 Create directories `src/` and `tests/` per plan.md Project Structure
-- [ ] T002 [P] Create `package.json` with `"private": true`, no dependencies, and script `"test": "node --test tests/"`
+- [ ] T002 [P] Create `package.json` with `"private": true`, no dependencies, and script `"test": "node --test"` (no path argument — see research R6)
 - [ ] T003 [P] Create `.gitignore` ignoring `node_modules/` and OS files (do NOT ignore `.specify/` or `specs/`)
 
 ---

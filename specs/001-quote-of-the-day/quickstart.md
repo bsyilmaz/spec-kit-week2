@@ -18,7 +18,7 @@ python3 -m http.server 8000   # then visit http://localhost:8000
 ## Automated tests
 
 ```bash
-npm test          # = node --test tests/
+npm test          # = node --test (auto-discovers tests/*.test.js)
 ```
 
 Expected: all tests pass, 0 failures. Covers FR-001–FR-004, FR-006, FR-007 (see the mapping in

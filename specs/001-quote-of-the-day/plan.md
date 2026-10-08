@@ -23,7 +23,7 @@ that are unit-tested with Node's built-in test runner, and a thin UI script wire
 
 **Storage**: Browser `localStorage`, key `qotd:favorites:v1`, value = JSON array of quote IDs.
 
-**Testing**: `node --test tests/` for logic modules (picker, favorites store, quote data
+**Testing**: `node --test` (default file discovery) for logic modules (picker, favorites store, quote data
 validity); manual browser checks in [quickstart.md](./quickstart.md) for layout/keyboard.
 
 **Target Platform**: Current evergreen browsers (desktop + mobile); opened via a static server

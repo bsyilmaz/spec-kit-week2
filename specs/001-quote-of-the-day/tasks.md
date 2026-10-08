@@ -154,3 +154,11 @@ Task: "Implement src/favorites.js"             # T013 (after T012 is red)
 
 - [ ] T019 Add an automated guard `tests/ui-safety.test.js` asserting `src/app.js` never uses `innerHTML`, `outerHTML`, `insertAdjacentHTML` or `document.write`, and update quickstart step 6 to name the actual FR-009 check, per FR-009 / Constitution III (partial)
 - [ ] T020 Create `README.md` (run, test, where spec artifacts live) — T016 is still open and no README exists, per plan: Project Structure / T016 (missing)
+
+---
+
+## Phase 8: Convergence
+
+- [ ] T021 Write failing tests in `tests/quote-picker.test.js` for `pickNext(quotes, currentId, rng)`: never returns `currentId` for any rng value in [0,1); maps rng uniformly over the n−1 remaining quotes; single-item list returns that quote; unknown `currentId` behaves like `pickRandom`; throws on empty/non-array, per FR-003 rev 2 / contracts/modules.md (missing)
+- [ ] T022 Implement `pickNext` in `src/quote-picker.js` (filter out current id, then `pickRandom`; fall back to full list when no candidate remains) and export it, per FR-003 rev 2 / research R2 (missing)
+- [ ] T023 Change the `#new-quote` click handler in `src/app.js` to use `pickNext(QUOTES, state.current.id)` instead of `pickRandom`, per FR-003 rev 2 / US2/AC1–AC2 (contradicts)

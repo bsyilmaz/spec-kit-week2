@@ -4,7 +4,7 @@
 
 **Created**: 2026-10-09
 
-**Status**: Draft
+**Status**: Draft (rev 2 — FR-003 refined after implement/converge round 1)
 
 **Input**: User description: "A quote-of-the-day page: one random quote from a built-in list, a \"New quote\" button, and favoriting that persists across reloads."
 
@@ -32,19 +32,22 @@ matters. On its own it is already a usable "quote of the day" page.
 ### User Story 2 - Get a new quote on demand (Priority: P2)
 
 A visitor who wants a different quote presses a clearly labeled "New quote" button and the page
-shows a randomly selected quote from the collection.
+shows a randomly selected quote from the collection that is **different from the one currently
+displayed**, so every press visibly changes the page.
 
 **Why this priority**: It turns a static page into something the visitor can explore, but the
 page already delivers value without it.
 
-**Independent Test**: Press "New quote" repeatedly; a quote from the collection is shown after
-each press, without reloading the page.
+**Independent Test**: Press "New quote" repeatedly; after every press the displayed quote is a
+different one from the collection, without reloading the page.
 
 **Acceptance Scenarios**:
 
 1. **Given** a quote is displayed, **When** the visitor presses "New quote", **Then** a randomly
-   selected quote from the collection is displayed in its place.
-2. **Given** the visitor uses only the keyboard, **When** they focus "New quote" and press Enter
+   selected quote **other than the current one** is displayed in its place.
+2. **Given** the visitor presses "New quote" many times in a row, **When** they compare each
+   quote with the one before it, **Then** no two consecutive quotes are the same.
+3. **Given** the visitor uses only the keyboard, **When** they focus "New quote" and press Enter
    or Space, **Then** the same behavior occurs.
 
 ---
@@ -81,7 +84,8 @@ until that quote is shown again; it is still marked as a favorite.
 - The browser blocks or has no available storage (private mode, quota full): the page still
   works; favoriting works for the current visit but is not remembered.
 - A saved favorite refers to a quote that no longer exists in the collection: it is ignored.
-- The collection contains a single quote: "New quote" still works and shows that quote.
+- The collection contains a single quote: "New quote" still works and shows that quote (the only
+  case where the same quote may be shown again).
 - Quote text contains characters such as `<`, `>` or `&`: they are shown literally.
 
 ## Requirements *(mandatory)*
@@ -93,7 +97,9 @@ until that quote is shown again; it is still marked as a favorite.
 - **FR-002**: On load, the page MUST display exactly one quote, chosen at random from the
   collection, together with its author.
 - **FR-003**: The page MUST provide a button labeled "New quote" that, when activated, replaces
-  the displayed quote with a randomly selected quote from the collection, without a page reload.
+  the displayed quote with a quote chosen at random from the collection **excluding the currently
+  displayed quote**, without a page reload. Every remaining quote MUST be equally likely. If the
+  collection has only one quote, that quote is shown again.
 - **FR-004**: The page MUST provide a favorite control for the displayed quote that toggles it
   between favorited and not favorited.
 - **FR-005**: The favorite control MUST visibly and accessibly reflect whether the displayed quote
@@ -117,7 +123,8 @@ until that quote is shown again; it is still marked as a favorite.
 ### Measurable Outcomes
 
 - **SC-001**: A quote is visible within 1 second of opening the page, with no user action.
-- **SC-002**: After pressing "New quote", a quote is shown in under 100 ms (perceived instant).
+- **SC-002**: After pressing "New quote", a different quote is shown in under 100 ms (perceived
+  instant) — 100% of presses produce a visible change when the collection has 2+ quotes.
 - **SC-003**: 100% of favorites made in a visit are still shown as favorites after a reload
   (when storage is available).
 - **SC-004**: A first-time visitor can favorite a quote within 10 seconds without instructions.

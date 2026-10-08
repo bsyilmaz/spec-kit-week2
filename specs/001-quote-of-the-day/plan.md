@@ -6,6 +6,10 @@
 
 **Note**: This template is filled in by the `/speckit-plan` command; its definition describes the execution workflow.
 
+**Revision log**: rev 2 (2026-10-09) — re-planned after spec rev 2 (FR-003 "no immediate
+repeat"): added `pickNext` (research R2, contracts/modules.md); FR-009 now has an automated
+guard. Earlier: test command corrected to `node --test` (research R6).
+
 ## Summary
 
 A single static page shows one random quote (text + author) from a built-in list, a
@@ -24,7 +28,7 @@ that are unit-tested with Node's built-in test runner, and a thin UI script wire
 **Storage**: Browser `localStorage`, key `qotd:favorites:v1`, value = JSON array of quote IDs.
 
 **Testing**: `node --test` (default file discovery) for logic modules (picker, favorites store, quote data
-validity); manual browser checks in [quickstart.md](./quickstart.md) for layout/keyboard.
+validity, UI-safety static guard); manual browser checks in [quickstart.md](./quickstart.md) for layout/keyboard.
 
 **Target Platform**: Current evergreen browsers (desktop + mobile); opened via a static server
 or directly from disk (`file://`).
@@ -60,12 +64,13 @@ introduced by the data model or contracts. No Complexity Tracking entries needed
 | Requirement | Verified by |
 |-------------|-------------|
 | FR-001 | `tests/quotes.test.js` (≥ 10 quotes, unique IDs, non-empty text/author) |
-| FR-002, FR-003 | `tests/quote-picker.test.js` + quickstart steps 1–2 |
+| FR-002 | `tests/quote-picker.test.js` (`pickRandom`) + quickstart step 1 |
+| FR-003 (rev 2) | `tests/quote-picker.test.js` (`pickNext`: never returns current, uniform over the rest, single-item fallback) + quickstart step 2 |
 | FR-004, FR-005 | `tests/favorites.test.js` (toggle) + quickstart step 3 (visual/ARIA state) |
 | FR-006 | `tests/favorites.test.js` (round-trip through a fake storage) + quickstart step 4 |
 | FR-007 | `tests/favorites.test.js` (corrupted JSON, throwing storage, missing storage) |
 | FR-008 | quickstart step 5 (keyboard-only pass) |
-| FR-009 | Code review rule (`textContent` only) + quickstart step 6 |
+| FR-009 | `tests/ui-safety.test.js` (no HTML-injecting APIs in `src/app.js`) + quickstart step 6 |
 
 ## Project Structure
 
@@ -89,7 +94,7 @@ specs/001-quote-of-the-day/
 index.html               # The page (entry point, opens directly)
 src/
 ├── quotes.js            # Data: built-in quote list (FR-001)
-├── quote-picker.js      # Logic: pick a quote, injectable RNG (FR-002, FR-003)
+├── quote-picker.js      # Logic: pickRandom (load) + pickNext (no repeat), injectable RNG (FR-002, FR-003)
 ├── favorites.js         # Logic: favorites store over injectable storage (FR-004–FR-007)
 ├── app.js               # UI: wires DOM events to logic, renders state (FR-005, FR-008, FR-009)
 └── styles.css           # Presentation

@@ -21,6 +21,15 @@ pickRandom(quotes, rng = Math.random) -> Quote
 - `rng`: function returning a number in `[0, 1)`.
 - Returns `quotes[Math.floor(rng() * quotes.length)]`.
 
+```text
+pickNext(quotes, currentId, rng = Math.random) -> Quote      # added in plan rev 2 (FR-003)
+```
+
+- `quotes`: non-empty array. Throws `Error` if empty or not an array.
+- Returns a quote whose `id !== currentId`, chosen uniformly among those candidates.
+- If no candidate remains (single-quote list), returns `quotes[0]`.
+- If `currentId` does not match any quote, behaves like `pickRandom(quotes, rng)`.
+
 ## `src/favorites.js`
 
 ```text

@@ -18,10 +18,22 @@ decisions and the alternatives that were rejected.
 
 ## R2. Random selection
 
-- **Decision**: `pickRandom(quotes, rng = Math.random)` returns `quotes[Math.floor(rng() * n)]`.
-- **Rationale**: Uniform, trivial, and deterministic in tests by injecting `rng`.
-- **Alternatives considered**: `crypto.getRandomValues` (rejected: cryptographic randomness is
-  unnecessary for quotes); shuffled deck (rejected for now: spec only asks for "random").
+- **Decision (rev 2)**: two functions.
+  - `pickRandom(quotes, rng)` — uniform pick, used once on page load (FR-002).
+  - `pickNext(quotes, currentId, rng)` — uniform pick among the quotes **whose id ≠ currentId**,
+    used by "New quote" (FR-003 rev 2). Implementation: build the candidate list by filtering out
+    the current id, then `pickRandom(candidates, rng)`. If filtering leaves nothing (single-quote
+    collection, or unknown/absent current id that removes nothing), fall back to the full list.
+- **Rationale**: Spec rev 2 requires every press to change the quote while keeping the remaining
+  quotes equally likely. Filter-then-pick is uniform over n−1 items, needs no retry loop, and is
+  deterministic in tests by injecting `rng`.
+- **Alternatives considered**: re-roll until different (rejected: unbounded loop, harder to test);
+  shuffled deck / no repeats until all seen (rejected: stronger than the spec asks, and adds state
+  that would need persisting to survive reloads); `crypto.getRandomValues` (rejected: unnecessary).
+- **History**: rev 1 used `pickRandom` for "New quote" too. With 15 quotes that repeats the
+  current quote 1/15 ≈ 6.7% of the time — a browser check measured 3 of 60 presses doing
+  "nothing". The code met spec rev 1, so `/speckit-converge` could not flag it; the spec was
+  refined instead.
 
 ## R3. Persisting favorites
 

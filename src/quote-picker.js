@@ -1,4 +1,5 @@
-// Quote selection logic (FR-002, FR-003). DOM-free; randomness is injected for tests.
+// Quote selection logic: pickRandom on load (FR-002), pickNext for "New quote" (FR-003 rev 2).
+// DOM-free; randomness is injected for tests.
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) {
@@ -21,5 +22,20 @@
     return quotes[Math.floor(rng() * quotes.length)];
   }
 
-  return { pickRandom };
+  /**
+   * Pick a quote other than the current one, uniformly among the rest (FR-003 rev 2).
+   * Falls back to the full list when nothing else is left (single-quote collection).
+   * @param {Array} quotes non-empty list
+   * @param {string} currentId id of the quote currently displayed
+   * @param {() => number} rng returns a number in [0, 1)
+   */
+  function pickNext(quotes, currentId, rng = Math.random) {
+    if (!Array.isArray(quotes) || quotes.length === 0) {
+      throw new Error('pickNext requires a non-empty array of quotes');
+    }
+    const candidates = quotes.filter((quote) => quote.id !== currentId);
+    return pickRandom(candidates.length > 0 ? candidates : quotes, rng);
+  }
+
+  return { pickRandom, pickNext };
 });

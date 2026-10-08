@@ -3,7 +3,7 @@
 (function () {
   'use strict';
 
-  const { QUOTES, pickRandom, createFavoritesStore } = window.QOTD;
+  const { QUOTES, pickRandom, pickNext, createFavoritesStore } = window.QOTD;
 
   const els = {
     text: document.getElementById('quote-text'),
@@ -39,7 +39,7 @@
   }
 
   els.newQuote.addEventListener('click', () => {
-    state.current = pickRandom(QUOTES);
+    state.current = pickNext(QUOTES, state.current.id);
     render();
   });
 

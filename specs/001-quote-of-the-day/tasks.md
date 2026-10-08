@@ -167,4 +167,4 @@ Task: "Implement src/favorites.js"             # T013 (after T012 is red)
 
 ## Phase 9: Convergence
 
-- [ ] T024 Remove the `<noscript>` message from `index.html` — it is not in contracts/ui.md, the spec, or tasks (keep the page to the contracted elements), per plan: contracts/ui.md (unrequested)
+- [X] T024 Remove the `<noscript>` message from `index.html` — it is not in contracts/ui.md, the spec, or tasks (keep the page to the contracted elements), per plan: contracts/ui.md (unrequested)

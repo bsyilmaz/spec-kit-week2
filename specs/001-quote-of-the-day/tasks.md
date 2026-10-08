@@ -162,3 +162,9 @@ Task: "Implement src/favorites.js"             # T013 (after T012 is red)
 - [X] T021 Write failing tests in `tests/quote-picker.test.js` for `pickNext(quotes, currentId, rng)`: never returns `currentId` for any rng value in [0,1); maps rng uniformly over the n−1 remaining quotes; single-item list returns that quote; unknown `currentId` behaves like `pickRandom`; throws on empty/non-array, per FR-003 rev 2 / contracts/modules.md (missing)
 - [X] T022 Implement `pickNext` in `src/quote-picker.js` (filter out current id, then `pickRandom`; fall back to full list when no candidate remains) and export it, per FR-003 rev 2 / research R2 (missing)
 - [X] T023 Change the `#new-quote` click handler in `src/app.js` to use `pickNext(QUOTES, state.current.id)` instead of `pickRandom`, per FR-003 rev 2 / US2/AC1–AC2 (contradicts)
+
+---
+
+## Phase 9: Convergence
+
+- [ ] T024 Remove the `<noscript>` message from `index.html` — it is not in contracts/ui.md, the spec, or tasks (keep the page to the contracted elements), per plan: contracts/ui.md (unrequested)
